@@ -18,8 +18,11 @@ for guessCount in range(6):
     if guess < number:
         print('Your guess is too low.')
 
+    if guess > number:
+        print('Your guess is too high.')
+
 if guess == number:
-    guessCount = str(guesCount + 1)
+    guessCount = str(guessCount + 1)
     print('Good job!  You guessed my number in ' + guessCount + ' guesses.')
 
 if guess != number:
