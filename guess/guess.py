@@ -1,29 +1,53 @@
 import random
 
-guessCount = 0
 
-print('Hey there!!!  What is your name?', end=' ')
-name = input();
+def debug(s):
+  print("[DEBUG: " + s + "]")
 
-number = random.randint(1, 25)
 
-for guessCount in range(6):
-    print('Take a guess: ', end='')
-    guessString = input()
-    guess = int(guessString)
+def validate(guessString):
+  if guessString.isdigit() == False:
+    print('Your guess must be a number')
+    return False
+  guess = int(guessString)
+  if guess > 25:
+    print('Your guess must be between 1 and 25!!!')
+    return False
+  if guess < 1:
+    print('Your guess must be between 1 and 25!!!')
+    return False
+  return True
 
-    if guess == number:
-        break
 
-    if guess < number:
-        print('Your guess is too low.')
+print("Hi, what is your name?")
+name = input()
 
-    if guess > number:
-        print('Your guess is too high.')
+print("Hi " + name + ", I have a random number between 1 and 25, can you guess it?")
+randomNumber = random.randint(1, 25)
+debug("Random number: " + str(randomNumber))
 
-if guess == number:
-    guessCount = str(guessCount + 1)
-    print('Good job!  You guessed my number in ' + guessCount + ' guesses.')
+numberOfGuesses = 1
+winner = False
 
-if guess != number:
-    print('Sorry, my number was ' + number)
+while numberOfGuesses <= 6 and winner == False:
+
+  print("Make a guess [count " + str(numberOfGuesses) + "]: ")
+  guessString = input()
+
+  valid = validate(guessString)
+  if (valid == False):
+    continue
+
+  guess = int(guessString)
+
+  if guess < randomNumber:
+    print("You are too low!")
+
+  if guess > randomNumber:
+    print("You are too high!")
+
+  if guess == randomNumber:
+     print('You won')
+     winner = True
+
+  numberOfGuesses = numberOfGuesses + 1
